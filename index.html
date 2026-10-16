@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>张现发 · 简历</title>
+<meta name="description" content="张现发，山东科技大学数据科学与大数据技术专业 2027 届本科生，求职方向为人工智能应用、数据分析与开发。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* ── 设计令牌 ───────────────────────────────────────────────
+   纸张：冷调灰白；油墨：偏蓝近黑；强调：深青（技术文档感）
+   布局：单栏文档，≥900px 时左侧留等宽标签栏，全部数字等宽对齐
+   ──────────────────────────────────────────────────────── */
+:root {
+  --bg:        #F3F5F7;
+  --surface:   #FFFFFF;
+  --fg:        #14181C;
+  --fg-soft:   #39424C;
+  --muted:     #6C7681;
+  --faint:     #98A2AC;
+  --line:      #DFE4E9;
+  --line-2:    #C6CFD7;
+  --accent:    #0E6C79;
+  --accent-2:  #0A4E58;
+  --wash:      #E4F1F3;
+  --chip-bg:   #EDF1F4;
+
+  --sans: "Noto Sans SC", system-ui, -apple-system, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono",
+          Menlo, Consolas, "Liberation Mono", monospace;
+
+  --rail: 8.5rem;
+  --gap:  1.75rem;
+  --maxw: 62rem;
+  --r:    6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:       #0E1216;
+    --surface:  #161C21;
+    --fg:       #E9EEF1;
+    --fg-soft:  #C2CBD3;
+    --muted:    #8D98A2;
+    --faint:    #6E7883;
+    --line:     #242C33;
+    --line-2:   #333D45;
+    --accent:   #4FC1CE;
+    --accent-2: #86DAE4;
+    --wash:     #123038;
+    --chip-bg:  #1D242A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:       #0E1216;
+  --surface:  #161C21;
+  --fg:       #E9EEF1;
+  --fg-soft:  #C2CBD3;
+  --muted:    #8D98A2;
+  --faint:    #6E7883;
+  --line:     #242C33;
+  --line-2:   #333D45;
+  --accent:   #4FC1CE;
+  --accent-2: #86DAE4;
+  --wash:     #123038;
+  --chip-bg:  #1D242A;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.page {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-block: 3rem 5rem;
+  padding-left:  max(1.25rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+/* ── 抬头 ───────────────────────────────────────────── */
+.masthead { padding-bottom: 1.75rem; border-bottom: 2px solid var(--fg); }
+
+.name {
+  margin: 0;
+  font-size: clamp(2.1rem, 6vw, 2.9rem);
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.name-en {
+  display: block;
+  margin-top: .4rem;
+  font-family: var(--mono);
+  font-size: .7rem;
+  font-weight: 400;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.tagline {
+  margin: .9rem 0 0;
+  color: var(--fg-soft);
+  font-size: .95rem;
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .35rem;
+  margin: 1.15rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: .78rem;
+  color: var(--muted);
+}
+.contact li { display: flex; align-items: baseline; gap: .35rem; }
+.contact li + li::before {
+  content: "";
+  width: 3px; height: 3px;
+  margin-right: .35rem;
+  align-self: center;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+.contact .k { color: var(--faint); }
+
+.target {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .5rem .9rem;
+  margin-top: 1.4rem;
+  padding: .85rem 1.1rem;
+  background: var(--wash);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r) var(--r) 0;
+}
+.target .k {
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .16em;
+  color: var(--accent);
+}
+.target .v { font-weight: 500; font-size: .95rem; }
+.target .note { color: var(--muted); font-size: .82rem; }
+
+/* ── 章节骨架 ───────────────────────────────────────── */
+.section {
+  display: grid;
+  grid-template-columns: var(--rail) 1fr;
+  gap: var(--gap);
+  padding-block: 2.6rem;
+  border-bottom: 1px solid var(--line);
+}
+.section:last-of-type { border-bottom: 0; }
+
+.section > .rail {
+  position: sticky;
+  top: 1.5rem;
+  align-self: start;
+  padding-top: .35rem;
+}
+.rail .zh {
+  display: block;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: .1em;
+}
+.rail .en {
+  display: block;
+  margin-top: .3rem;
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.section > .body { min-width: 0; }
+
+/* ── 条目 ───────────────────────────────────────────── */
+.entry + .entry {
+  margin-top: 2.1rem;
+  padding-top: 2.1rem;
+  border-top: 1px dashed var(--line);
+}
+
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .3rem .8rem;
+}
+.entry-title {
+  margin: 0;
+  font-size: 1.06rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .3rem .8rem;
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: .74rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.role { color: var(--accent); }
+.entry-sub {
+  margin: .45rem 0 0;
+  font-size: .86rem;
+  color: var(--muted);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin: .7rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.stack li {
+  padding: .1rem .5rem;
+  background: var(--chip-bg);
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--fg-soft);
+  line-height: 1.7;
+}
+.stack li.repo { background: transparent; border: 1px solid var(--line-2); }
+.stack li.repo a { font-weight: 500; }
+
+.bullets {
+  margin: .85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.bullets li {
+  position: relative;
+  padding-left: 1.15rem;
+  margin-top: .55rem;
+  font-size: .9rem;
+  color: var(--fg-soft);
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .72em;
+  width: .5rem; height: 1px;
+  background: var(--accent);
+}
+.bullets b { color: var(--fg); font-weight: 500; }
+.bullets .num {
+  font-family: var(--mono);
+  font-size: .84em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+  background: var(--chip-bg);
+  padding: 0 .28em;
+  border-radius: 3px;
+}
+
+/* ── 教育 / 荣誉 的紧凑行 ───────────────────────────── */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .5rem;
+  margin: .8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.facts li {
+  padding: .35rem .7rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+}
+.facts .k {
+  display: block;
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .12em;
+  color: var(--faint);
+}
+.facts .v { font-weight: 500; }
+
+.rows { margin: 0; }
+.rows dt {
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  color: var(--accent);
+  margin-top: 1.2rem;
+}
+.rows dt:first-child { margin-top: 0; }
+.rows dd {
+  margin: .35rem 0 0;
+  font-size: .9rem;
+  color: var(--fg-soft);
+}
+.rows dd strong { color: var(--fg); font-weight: 500; }
+
+/* ── 仓库列表 ───────────────────────────────────────── */
+.repos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: .6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.repos li {
+  padding: .7rem .85rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+.repos .rn {
+  font-family: var(--mono);
+  font-size: .78rem;
+  font-weight: 500;
+  word-break: break-all;
+}
+.repos .rd {
+  display: block;
+  margin-top: .2rem;
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.repos .new::after {
+  content: "新增";
+  margin-left: .45rem;
+  padding: 0 .3rem;
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .08em;
+  color: var(--accent);
+  background: var(--wash);
+  border-radius: 3px;
+  vertical-align: 1px;
+}
+
+.foot {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1rem;
+}
+
+/* ── 窄屏 ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .section { grid-template-columns: 1fr; gap: 1rem; padding-block: 2.1rem; }
+  .section > .rail {
+    position: static;
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+    padding-top: 0;
+    padding-bottom: .2rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  .rail .en { margin-top: 0; }
+  .entry-meta { margin-left: 0; width: 100%; }
+  .page { padding-block: 2rem 3.5rem; }
+}
+
+/* ── 打印：Ctrl+P 直接导出 PDF ─────────────────────── */
+@media print {
+  :root { --bg: #fff; --surface: #fff; --fg: #000; --fg-soft: #222; --muted: #555;
+          --faint: #777; --line: #bbb; --line-2: #999; --accent: #0A4E58;
+          --accent-2: #0A4E58; --wash: #EEF4F5; --chip-bg: #F2F4F5; }
+  body { font-size: 10.5pt; background: #fff; color: #000; }
+  .page { max-width: none; padding: 0; }
+  .section { padding-block: 1.1rem; }
+  .section > .rail { position: static; }
+  .entry, .repos li, .facts li, .target { break-inside: avoid; }
+  .entry + .entry { margin-top: 1.1rem; padding-top: 1.1rem; }
+  .name { font-size: 22pt; }
+  a { color: #000; text-decoration: none; }
+  .repos .new::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <h1 class="name">张现发<span class="name-en">Zhang Xianfa</span></h1>
+    <p class="tagline">
+      山东科技大学（青岛校区）· 数据科学与大数据技术 · 本科 2023.09 – 2027.06<br>
+      男 · 22 岁 · 现居青岛 · 政治面貌：入党积极分子
+    </p>
+
+    <ul class="contact">
+      <li><span class="k">TEL</span> <a href="tel:+8619045382689">190 4538 2689</a></li>
+      <li><span class="k">WECHAT</span> vx19045382689</li>
+      <li><span class="k">MAIL</span> <a href="mailto:1849363242@qq.com">1849363242@qq.com</a></li>
+      <li><span class="k">GITHUB</span> <a href="https://github.com/zhang-xianfa" target="_blank" rel="noopener">github.com/zhang-xianfa</a></li>
+      <li><span class="k">KAGGLE</span> <a href="https://www.kaggle.com/zhangxianfa" target="_blank" rel="noopener">kaggle.com/zhangxianfa</a></li>
+    </ul>
+
+    <div class="target">
+      <span class="k">求职意向</span>
+      <span class="v">人工智能应用 / 数据分析与开发 / 技术支持工程师</span>
+      <span class="note">可接受出差 · 无考试计划 · 月内到岗</span>
+    </div>
+  </header>
+
+  <!-- 教育经历 -->
+  <section class="section">
+    <div class="rail"><span class="zh">教育经历</span><span class="en">Education</span></div>
+    <div class="body">
+      <div class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">山东科技大学（青岛校区）　数据科学与大数据技术</h2>
+          <div class="entry-meta"><span>本科</span><span>2023.09 – 2027.06</span></div>
+        </div>
+        <ul class="facts">
+          <li><span class="k">GPA</span><span class="v">3.47 / 4.0　（86.64 分）</span></li>
+          <li><span class="k">专业排名</span><span class="v">24 / 200　前 12%</span></li>
+          <li><span class="k">班级排名</span><span class="v">3 / 32　前 9%</span></li>
+        </ul>
+        <p class="entry-sub"><b>主修课程</b>　Hadoop、大数据分析方法及应用、算法设计与分析、时间序列分析、数据采集与网络爬虫、C++、Java、Python、Linux、Matlab、R 语言、数据库原理及应用、数据可视化、云计算、软件工程、计算机网络、算法程序与设计</p>
+        <p class="entry-sub"><b>资格证书</b>　大学英语四级（CET-4）、中级大数据工程师、国际人才英语考试（ETIC）、普通话证书、机动车驾驶证</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 荣誉奖项 -->
+  <section class="section">
+    <div class="rail"><span class="zh">荣誉奖项</span><span class="en">Honors</span></div>
+    <div class="body">
+      <dl class="rows">
+        <dt>国家级</dt>
+        <dd><strong>国家励志奖学金</strong></dd>
+
+        <dt>省部级</dt>
+        <dd>全国大学生市场调查与分析大赛 <strong>一等奖</strong>；全国大学生数学建模竞赛 <strong>二等奖</strong>；全国大学生统计建模大赛 <strong>二等奖</strong>；五一数学建模竞赛 <strong>二等奖</strong>；山东省数学建模竞赛 三等奖；全球校园人工智能算法精英大赛 算法创新奖；蓝桥杯程序设计竞赛 省奖；山东省大学生科技外语大赛　等省级奖项</dd>
+
+        <dt>院校级</dt>
+        <dd>一等奖学金、优秀学生干部、优秀共青团员、优秀学生标兵、三好学生、优秀志愿者、数学九五奖学金等</dd>
+
+        <dt>科研项目</dt>
+        <dd>参与国家级大创 1 项（机器视觉方向）、校级大创 3 项，<strong>均已结项</strong></dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 项目经历 -->
+  <section class="section">
+    <div class="rail"><span class="zh">项目经历</span><span class="en">Projects</span></div>
+    <div class="body">
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">B/S 架构医疗 AI 智能问诊 RAG 系统</h2>
+          <div class="entry-meta"><span class="role">个人开发</span><span>2026.04 – 2026.07</span></div>
+        </div>
+        <ul class="stack">
+          <li>Python</li><li>FastAPI</li><li>LangGraph</li><li>PostgreSQL</li><li>pgvector</li><li>Docker Compose</li>
+          <li class="repo"><a href="https://github.com/zhang-xianfa/medical-qa-rag" target="_blank" rel="noopener">medical-qa-rag</a></li>
+        </ul>
+        <ul class="bullets">
+          <li><b>多轮问诊工作流：</b>基于 FastAPI + LangGraph 搭建「安全检测 → 基础问诊 → 专家问诊 → 诊断报告」四阶段工作流，基础问诊 ≤ 5 轮、会话总轮次 ≤ 10 轮，完成业务分层与循环交互逻辑。</li>
+          <li><b>混合检索与存储：</b>「向量 + BM25」双路召回 + RRF（k=60）融合，按来源权威度加权（指南 0.9 &gt; 共识 0.75），结果按知识条目跨轮次去重累计；PostgreSQL + pgvector 统一存储业务数据与 22 条知识条目。</li>
+          <li><b>容错与安全护栏：</b>封装 LLM 适配层 —— embedding 三级降级、四重 JSON 修复 + Pydantic 校验、失败重试 3 次；构建 3 条 L0 危急关键词阻塞规则、6 类 PII 脱敏与双向剂量阻断等确定性安全护栏。</li>
+          <li><b>工程与交付：</b>后端 6,036 行、8 个 REST 接口、9 张数据表；24 个 E2E 用例 100% 自动化（132 个测试函数）；Docker Compose 4 服务部署至腾讯云，Git 累计 44 次提交。</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">企业横向课题：煤矿采空区自燃风险预测（分层时空图神经网络）</h2>
+          <div class="entry-meta"><span class="role">第一负责人</span><span>2025.08 – 2025.12</span></div>
+        </div>
+        <ul class="stack">
+          <li>Python</li><li>PyTorch</li><li>PyG</li><li>Pandas</li><li>Matplotlib</li>
+          <li class="repo"><a href="https://github.com/zhang-xianfa/coal-fire-warning" target="_blank" rel="noopener">coal-fire-warning</a></li>
+        </ul>
+        <ul class="bullets">
+          <li><b>数据清洗与特征工程：</b>解析煤矿束管监测系统 12 个月、每日一表的月度 .xls 报表（表头 3 行、格式不统一），完成缺失值插值与回风数据剔除；构造 13 维测点特征（6 项基础气体浓度 + 6 项一阶差分 + Graham 比值 CO/O₂），并将 6 个监测点、2 条巷道建模为两级图结构。</li>
+          <li><b>建模与训练：</b>设计分层时空图神经网络 —— 微观层 2 层多头 GAT（4 头 → 1 头）捕获测点间气体流动的空间关联，宏观层 2 层 GCN 抽象巷道级趋势，跨层双向消息传递（均值池化上送 / 广播下传，残差 + LayerNorm），再经 2 层 GRU 建模时序依赖；用过去 7 天数据预测第 8 天各测点气体浓度。</li>
+          <li><b>小样本与业务约束：</b>设计 RiskAwareLoss 非对称风险感知损失（O₂ 权重 15 / CO 漏报惩罚 2 / CO₂ 权重 5），对漏报加倍惩罚；针对约 300 天小样本，用 weight_decay、全链路 Dropout、按验证损失保存最优模型等策略抑制过拟合。</li>
+          <li><b>消融与工程化：</b>消融发现 CO 惩罚系数取 5.0 时模型虚报 CO 至 10.7 ppm，下调至 2.0 后抑制虚报；将 950 行单文件原型重构为 12 个模块（2,442 行），数据按 7 : 1.5 : 1.5 划分。</li>
+          <li><b>风险评估与可视化：</b>基于「熵权法 × 7 日趋势因子 × CO 浓度压制」搭建三层风险评估体系（CO &gt; 24 ppm 触发预警），产出 254 张单日 / 时序热力图与 3D 巷道风险可视化定位高风险测点，独立撰写技术报告。</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">招聘岗位数据采集与分析平台</h2>
+          <div class="entry-meta"><span class="role">独立完成</span><span>2026.04 – 2026.06</span></div>
+        </div>
+        <ul class="stack">
+          <li>curl_cffi</li><li>Playwright</li><li>lxml</li><li>MySQL</li><li>Pandas</li><li>jieba</li><li>WordCloud</li><li>Flask</li>
+          <li class="repo"><a href="https://github.com/zhang-xianfa/job-crawler-analysis" target="_blank" rel="noopener">job-crawler-analysis</a></li>
+        </ul>
+        <ul class="bullets">
+          <li><b>数据采集：</b>针对招聘网站接口的反爬与限流，实现 requests / curl_cffi（TLS 指纹伪装）/ Playwright（无头浏览器）三套请求方案并实测拦截率，配合随机休眠、分页冷却与失败熔断机制，稳定采集青岛地区岗位信息 <span class="num">187</span> 条（累计抓取分页明细 <span class="num">1,562</span> 条）。</li>
+          <li><b>清洗与入库：</b>解析岗位名称、薪资区间、公司规模、技能标签等 12 个字段，处理「90-100 元/时」等非标准薪资格式（拆分为 min / max / avg 三列），清洗后写入 MySQL 结构化存储。</li>
+          <li><b>分析与可视化：</b>用 pandas 完成岗位经验、学历与公司规模的分布统计及薪资描述性分析（青岛地区平均 <span class="num">7,428</span> 元、中位数 <span class="num">6,500</span> 元）；jieba 分词 + WordCloud 生成岗位技能需求词云，Flask 提供检索页面。</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">零售数仓分层构建与可视化分析（大数据 Hive 应用）</h2>
+          <div class="entry-meta"><span class="role">独立完成</span><span>2026.09 – 2026.10</span></div>
+        </div>
+        <ul class="stack">
+          <li>Hadoop</li><li>Hive</li><li>Spark SQL</li><li>Flume</li><li>Sqoop</li><li>MySQL</li><li>Streamlit</li>
+          <li class="repo"><a href="https://github.com/zhang-xianfa/retail-data-warehouse" target="_blank" rel="noopener">retail-data-warehouse</a></li>
+        </ul>
+        <ul class="bullets">
+          <li><b>数据采集与入湖：</b>用 Flume 采集 POS 交易日志、Sqoop 完成 MySQL 业务库的全量 / 按时间戳增量同步，落地 HDFS 形成 ODS 贴源层（业务日期 + 门店两级分区，整月 300 个分区）。</li>
+          <li><b>数仓分层加工：</b>基于 Spark SQL 完成 DWD 明细宽表（多表关联、编码翻译、缺失值填充）与 DWS 门店日销汇总（销售额 / 销量 / 订单数 / 客单价）；用动态分区一次作业写出整月 30 个分区（30 次作业合并为 1 次），加工 <span class="num">4,972</span> 笔有效交易，总销售额 <span class="num">400,606.67</span> 元。</li>
+          <li><b>质量校验与调优：</b>设计 ODS / DWD / DWS 三层逐层对账（行数、金额合计、维度基数），三层金额合计完全一致（0 差异）；用 pandas 完成清洗、日期补全与 IQR 异常值识别，产出 7 张分析图表与 Streamlit 看板；定位 HiveServer2 查询瓶颈并开启本地执行模式，接口响应由 <span class="num">57.2</span> 秒降至 <span class="num">1.6 ~ 3.2</span> 秒（约 30 倍）。</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">企业横向课题：油罐车变位场景下的工业计量偏差校正建模</h2>
+          <div class="entry-meta"><span class="role">第一负责人</span><span>2025.06 – 2025.10</span></div>
+        </div>
+        <ul class="stack">
+          <li>Python</li><li>NumPy</li><li>SciPy</li><li>Pandas</li><li>MATLAB</li>
+          <li class="repo"><a href="https://github.com/zhang-xianfa/tank-volume-correction" target="_blank" rel="noopener">tank-volume-correction</a></li>
+        </ul>
+        <ul class="bullets">
+          <li><b>建模与校正：</b>针对油罐车纵向 / 横向倾斜导致探针读数与真实储液量存在系统性偏差的问题，建立卧式油罐储液体积几何模型（200 × 100 网格二重数值积分）并推导变位修正关系；以「装车体积 = 卸车体积」为物理约束逐仓拟合校正系数（k ∈ [0.90, 1.10]，有效记录 &lt; 20 条的仓不参与优化），目标函数用误差中位数加正则化项以抗离群、防过拟合。</li>
+          <li><b>数据与结果：</b>处理 8 辆车共 <span class="num">3,303</span> 条装卸记录，整体平均相对误差 <span class="num">0.736%</span>（逐车 0.40% ~ 1.42%）；输出技术文档并面向企业宣讲对接。</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 竞赛项目 -->
+  <section class="section">
+    <div class="rail"><span class="zh">竞赛项目</span><span class="en">Competitions</span></div>
+    <div class="body">
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">全国大学生统计建模大赛 —— 乳腺癌单细胞转录组批次效应整合</h2>
+          <div class="entry-meta"><span class="role">第一负责人</span><span>二等奖（省级）</span><span>2025.03 – 2025.05</span></div>
+        </div>
+        <ul class="stack">
+          <li>Python</li><li>scVI</li><li>Scanpy</li><li>Harmony / ComBat</li><li>GSEA</li>
+          <li class="repo"><a href="https://github.com/zhang-xianfa/scvi-breast-cancer-lung-metastasis" target="_blank" rel="noopener">scvi-breast-cancer-lung-metastasis</a></li>
+        </ul>
+        <ul class="bullets">
+          <li><b>数据与建模：</b>处理 GSE202695 数据集的 <span class="num">1,523</span> 个原发瘤 / 肺转移瘤细胞，训练 scVI（变分自编码器，30 维隐空间）完成批次效应整合；与 ComBat、Harmony、CCA、fastMNN 四种方法对比，kBET <span class="num">0.549</span>、LISI <span class="num">4.121</span> 在四种方法中均为最优。</li>
+          <li><b>分析与结论：</b>Leiden 聚类得到 12 类细胞并经 GSEA 归并为 3 个超级簇，结合差异表达分析与 GSEA / GO 富集，挖掘与肺转移相关的细胞亚群及其特征通路。</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">全国大学生数学建模竞赛 A 题 —— 烟幕干扰弹的投放策略</h2>
+          <div class="entry-meta"><span class="role">第一负责人</span><span>二等奖（省级）</span><span>2025.09</span></div>
+        </div>
+        <ul class="stack">
+          <li>MATLAB</li><li>Python</li><li>SciPy</li><li>NumPy</li>
+          <li class="repo"><a href="https://github.com/zhang-xianfa/cumcm-2025-a-smoke-interference" target="_blank" rel="noopener">cumcm-2025-a-smoke-interference</a></li>
+        </ul>
+        <ul class="bullets">
+          <li><b>问题建模：</b>将「烟幕云团能否遮挡导弹对真目标的视线」这一几何判定，转化为以导弹为顶点、向烟幕球作切锥的遮挡判据，并在真目标圆柱的上下底面两个平面上分别判定覆盖关系。</li>
+          <li><b>求解与结果：</b>构造以切锥半顶角为界的平滑遮蔽质量函数，把不可导的布尔判定转化为可优化的连续目标；用差分进化 + L-BFGS-B 局部精化求解 4 ~ 40 维投放策略（无人机速度、航向、投放时刻与起爆延迟），5 个问题的最优有效遮蔽时长分别为 <span class="num">1.42</span> / <span class="num">4.08</span> / <span class="num">6.25</span> / <span class="num">12.34</span> / <span class="num">23.63</span> 秒，并用解析几何对结果做交叉验证。</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 校园经历 -->
+  <section class="section">
+    <div class="rail"><span class="zh">校园经历</span><span class="en">Campus</span></div>
+    <div class="body">
+      <div class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">学生工作</h2>
+          <div class="entry-meta"><span>2023.09 – 2026.09</span></div>
+        </div>
+        <p class="entry-sub">曾在校团委、数学学院科创部、校人事处工作，任班级班委，负责赛事组织与设备维护，获评校「优秀学生干部」。</p>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <h2 class="entry-title">志愿服务</h2>
+          <div class="entry-meta"><span>2023.09 – 2026.09</span></div>
+        </div>
+        <p class="entry-sub">参与组织青岛马拉松、青岛啤酒节、暑期三下乡社会实践等活动，获评校「优秀志愿者」。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 专业技能 -->
+  <section class="section">
+    <div class="rail"><span class="zh">专业技能</span><span class="en">Skills</span></div>
+    <div class="body">
+      <ul class="bullets">
+        <li><b>AI 与算法：</b>掌握 PyTorch，可搭建时序模型与图神经网络（GAT / GCN / GRU）；具备 LLM 应用开发经验，熟悉 RAG、向量检索、混合召回（BM25 / RRF）、Agent 工作流编排（LangGraph）与 Prompt 工程。</li>
+        <li><b>后端与工程：</b>熟练 Python，熟悉 FastAPI / RESTful 接口开发；熟练 Linux 常用命令与 Shell 脚本、Git 版本管理、Docker 容器化部署，具备项目云端部署与系统测试经验。</li>
+        <li><b>数据分析与建模：</b>熟练运用 Pandas、NumPy、SciPy 与 SQL 开展数据清洗、特征工程、统计分析与可视化，掌握假设检验、时间序列分析；可使用 SPSS、Stata、AMOS、Power BI 完成问卷统计、信效度检验与模型分析。</li>
+        <li><b>数据库与存储：</b>熟练 SQL 编写与优化；掌握 PostgreSQL、MySQL，熟悉 pgvector 向量存储与 Redis 缓存。</li>
+        <li><b>大数据平台：</b>掌握 Hadoop 生态（HDFS、YARN），熟悉 Hive 数仓分层建模与 ETL 流程，了解 Flink、Kafka、Flume 等组件。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 自我评价 -->
+  <section class="section">
+    <div class="rail"><span class="zh">自我评价</span><span class="en">Summary</span></div>
+    <div class="body">
+      <ul class="bullets">
+        <li>具备完整的 AI 应用开发能力：从 LLM 调用适配、RAG 检索链路构建、Agent 工作流编排到 Docker 部署上线，能主导一个 AI 应用从 0 到 1 的工程交付；同时具备扎实的数据处理与建模功底。</li>
+        <li>有真实企业横向课题经验（2 项，均任第一负责人），习惯用数据支撑结论：如将油罐车计量平均相对误差降至 0.736%、为煤矿自燃预警设计三层风险评估体系。</li>
+        <li>学习与自驱能力强：GPA 专业前 12%，获国家级奖学金及十余项省级以上竞赛奖项，能在短时间内上手陌生技术栈并落地。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 开源仓库 -->
+  <section class="section">
+    <div class="rail"><span class="zh">开源仓库</span><span class="en">Repositories</span></div>
+    <div class="body">
+      <ul class="repos">
+        <li><a class="rn" href="https://github.com/zhang-xianfa/medical-qa-rag" target="_blank" rel="noopener">medical-qa-rag</a><span class="rd">医疗 AI 智能问诊 RAG 系统</span></li>
+        <li><a class="rn" href="https://github.com/zhang-xianfa/coal-fire-warning" target="_blank" rel="noopener">coal-fire-warning</a><span class="rd">煤矿采空区自燃风险预测</span></li>
+        <li><a class="rn" href="https://github.com/zhang-xianfa/job-crawler-analysis" target="_blank" rel="noopener">job-crawler-analysis</a><span class="rd">招聘岗位数据采集与分析</span></li>
+        <li><a class="rn" href="https://github.com/zhang-xianfa/retail-data-warehouse" target="_blank" rel="noopener">retail-data-warehouse</a><span class="rd">零售数仓分层构建与可视化</span></li>
+        <li><a class="rn" href="https://github.com/zhang-xianfa/tank-volume-correction" target="_blank" rel="noopener">tank-volume-correction</a><span class="rd">油罐车计量偏差校正建模</span></li>
+        <li><a class="rn" href="https://github.com/zhang-xianfa/scvi-breast-cancer-lung-metastasis" target="_blank" rel="noopener">scvi-breast-cancer-lung-metastasis</a><span class="rd">统计建模 · 单细胞批次效应整合</span></li>
+        <li><a class="rn" href="https://github.com/zhang-xianfa/cumcm-2025-a-smoke-interference" target="_blank" rel="noopener">cumcm-2025-a-smoke-interference</a><span class="rd">数模国赛 A 题 · 烟幕干扰弹</span></li>
+        <li><a class="rn new" href="https://github.com/zhang-xianfa/fingerprint-enhancement" target="_blank" rel="noopener">fingerprint-enhancement</a><span class="rd">潜在指纹增强 · 多尺度 PatchGAN</span></li>
+        <li><a class="rn new" href="https://github.com/zhang-xianfa/str-mixture-identification" target="_blank" rel="noopener">str-mixture-identification</a><span class="rd">法医物证多人身份鉴定 · STR 混合图谱</span></li>
+        <li><a class="rn new" href="https://github.com/zhang-xianfa/sake-secondhand-marketplace" target="_blank" rel="noopener">sake-secondhand-marketplace</a><span class="rd">SAKE 校园二手交易平台</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>张现发 · 数据科学与大数据技术</span>
+    <span>最后更新 2026-10-16</span>
+  </footer>
+
+</div>
+</body>
+</html>

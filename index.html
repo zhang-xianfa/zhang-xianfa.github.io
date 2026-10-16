@@ -10,63 +10,64 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
 <style>
 /* ── 设计令牌 ───────────────────────────────────────────────
-   纸张：冷调灰白；油墨：偏蓝近黑；强调：深青（技术文档感）
-   布局：单栏文档，≥900px 时左侧留等宽标签栏，全部数字等宽对齐
+   纸张：冷调灰白；油墨：偏蓝近黑；强调：深青
+   布局：技术文档。章节走「标签栏 + 正文」两栏，技能与联系方式
+        走「键 / 值」对照，全部数字等宽对齐便于竖读比较
    ──────────────────────────────────────────────────────── */
 :root {
-  --bg:        #F3F5F7;
+  --bg:        #F2F4F6;
   --surface:   #FFFFFF;
-  --fg:        #14181C;
-  --fg-soft:   #39424C;
-  --muted:     #6C7681;
-  --faint:     #98A2AC;
-  --line:      #DFE4E9;
-  --line-2:    #C6CFD7;
-  --accent:    #0E6C79;
-  --accent-2:  #0A4E58;
-  --wash:      #E4F1F3;
-  --chip-bg:   #EDF1F4;
+  --fg:        #12161A;
+  --fg-soft:   #3A434D;
+  --muted:     #6B7580;
+  --faint:     #9AA4AE;
+  --line:      #DEE3E8;
+  --line-2:    #C3CCD5;
+  --accent:    #0D6874;
+  --accent-2:  #09505A;
+  --wash:      #E3F0F2;
+  --chip-bg:   #EAEFF2;
 
   --sans: "Noto Sans SC", system-ui, -apple-system, "PingFang SC",
           "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono",
           Menlo, Consolas, "Liberation Mono", monospace;
 
-  --rail: 8.5rem;
-  --gap:  1.75rem;
-  --maxw: 62rem;
-  --r:    6px;
+  --rail: 8.25rem;
+  --gap:  2.25rem;
+  --maxw: 60rem;
+  --r:    5px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg:       #0E1216;
-    --surface:  #161C21;
-    --fg:       #E9EEF1;
-    --fg-soft:  #C2CBD3;
-    --muted:    #8D98A2;
-    --faint:    #6E7883;
-    --line:     #242C33;
-    --line-2:   #333D45;
-    --accent:   #4FC1CE;
-    --accent-2: #86DAE4;
-    --wash:     #123038;
-    --chip-bg:  #1D242A;
+    --bg:       #0D1115;
+    --surface:  #151B20;
+    --fg:       #E8EDF0;
+    --fg-soft:  #BFC8D0;
+    --muted:    #8A949E;
+    --faint:    #6B757F;
+    --line:     #222A31;
+    --line-2:   #323C44;
+    --accent:   #4CBECC;
+    --accent-2: #82D8E2;
+    --wash:     #113037;
+    --chip-bg:  #1C2329;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg:       #0E1216;
-  --surface:  #161C21;
-  --fg:       #E9EEF1;
-  --fg-soft:  #C2CBD3;
-  --muted:    #8D98A2;
-  --faint:    #6E7883;
-  --line:     #242C33;
-  --line-2:   #333D45;
-  --accent:   #4FC1CE;
-  --accent-2: #86DAE4;
-  --wash:     #123038;
-  --chip-bg:  #1D242A;
+  --bg:       #0D1115;
+  --surface:  #151B20;
+  --fg:       #E8EDF0;
+  --fg-soft:  #BFC8D0;
+  --muted:    #8A949E;
+  --faint:    #6B757F;
+  --line:     #222A31;
+  --line-2:   #323C44;
+  --accent:   #4CBECC;
+  --accent-2: #82D8E2;
+  --wash:     #113037;
+  --chip-bg:  #1C2329;
   color-scheme: dark;
 }
 
@@ -78,261 +79,283 @@ body {
   color: var(--fg);
   font-family: var(--sans);
   font-size: 15px;
-  line-height: 1.75;
+  line-height: 1.78;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
-
 .page {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding-block: 3rem 5rem;
-  padding-left:  max(1.25rem, env(safe-area-inset-left, 0px));
-  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+  padding-block: 3.5rem 5rem;
+  padding-left:  max(1.35rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1.35rem, env(safe-area-inset-right, 0px));
 }
-
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 
-/* ── 抬头 ───────────────────────────────────────────── */
-.masthead { padding-bottom: 1.75rem; border-bottom: 2px solid var(--fg); }
-
+/* ── 抬头：左身份 / 右联系 ───────────────────────────── */
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem 3rem;
+  align-items: start;
+  padding-bottom: 1.6rem;
+  border-bottom: 2px solid var(--fg);
+}
 .name {
   margin: 0;
-  font-size: clamp(2.1rem, 6vw, 2.9rem);
+  font-size: clamp(2.2rem, 5.5vw, 3rem);
   font-weight: 700;
-  letter-spacing: .04em;
-  line-height: 1.15;
-  text-wrap: balance;
+  letter-spacing: .05em;
+  line-height: 1.1;
 }
-.name-en {
+.name small {
   display: block;
-  margin-top: .4rem;
+  margin-top: .45rem;
   font-family: var(--mono);
-  font-size: .7rem;
+  font-size: .68rem;
   font-weight: 400;
-  letter-spacing: .3em;
+  letter-spacing: .32em;
   text-transform: uppercase;
   color: var(--faint);
 }
 .tagline {
-  margin: .9rem 0 0;
+  margin: 1rem 0 0;
+  max-width: 34ch;
+  font-size: .93rem;
   color: var(--fg-soft);
-  font-size: .95rem;
 }
+.tagline span { color: var(--muted); }
 
 .contact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem .35rem;
-  margin: 1.15rem 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
+  display: grid;
+  gap: .3rem;
   font-family: var(--mono);
-  font-size: .78rem;
-  color: var(--muted);
+  font-size: .76rem;
+  line-height: 1.6;
+  text-align: right;
 }
-.contact li { display: flex; align-items: baseline; gap: .35rem; }
-.contact li + li::before {
-  content: "";
-  width: 3px; height: 3px;
-  margin-right: .35rem;
+.contact li { display: grid; grid-template-columns: auto auto; gap: .8rem; justify-content: end; }
+.contact .k {
+  font-size: .62rem;
+  letter-spacing: .14em;
+  color: var(--faint);
   align-self: center;
-  border-radius: 50%;
-  background: var(--line-2);
 }
-.contact .k { color: var(--faint); }
+.contact .v { color: var(--fg-soft); font-variant-numeric: tabular-nums; }
+.contact .v a { color: var(--fg-soft); }
+.contact .v a:hover { color: var(--accent); }
 
 .target {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: .5rem .9rem;
-  margin-top: 1.4rem;
-  padding: .85rem 1.1rem;
+  gap: .4rem 1rem;
+  margin-top: 1.5rem;
+  padding: .9rem 1.15rem;
   background: var(--wash);
   border-left: 3px solid var(--accent);
   border-radius: 0 var(--r) var(--r) 0;
 }
 .target .k {
   font-family: var(--mono);
-  font-size: .68rem;
+  font-size: .64rem;
   letter-spacing: .16em;
   color: var(--accent);
+  align-self: center;
 }
 .target .v { font-weight: 500; font-size: .95rem; }
-.target .note { color: var(--muted); font-size: .82rem; }
+.target .note { color: var(--muted); font-size: .8rem; }
 
-/* ── 章节骨架 ───────────────────────────────────────── */
+/* ── 章节：标签栏 + 正文 ─────────────────────────────── */
 .section {
   display: grid;
-  grid-template-columns: var(--rail) 1fr;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
   gap: var(--gap);
-  padding-block: 2.6rem;
+  padding-block: 2.75rem;
   border-bottom: 1px solid var(--line);
 }
 .section:last-of-type { border-bottom: 0; }
-
 .section > .rail {
   position: sticky;
-  top: 1.5rem;
+  top: 1.75rem;
   align-self: start;
-  padding-top: .35rem;
 }
 .rail .zh {
   display: block;
   font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: .1em;
+  font-size: 1.02rem;
+  letter-spacing: .12em;
+  line-height: 1.4;
 }
 .rail .en {
   display: block;
-  margin-top: .3rem;
+  margin-top: .35rem;
   font-family: var(--mono);
-  font-size: .62rem;
-  letter-spacing: .18em;
+  font-size: .6rem;
+  letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--faint);
 }
+.rail .en::after {
+  content: "";
+  display: block;
+  width: 1.4rem;
+  height: 2px;
+  margin-top: .7rem;
+  background: var(--accent);
+}
 .section > .body { min-width: 0; }
 
-/* ── 条目 ───────────────────────────────────────────── */
+/* ── 项目条目 ───────────────────────────────────────── */
 .entry + .entry {
-  margin-top: 2.1rem;
-  padding-top: 2.1rem;
-  border-top: 1px dashed var(--line);
+  margin-top: 2.25rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--line);
 }
-
 .entry-head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: .3rem .8rem;
+  gap: .35rem 1rem;
 }
 .entry-title {
   margin: 0;
-  font-size: 1.06rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.55;
   text-wrap: balance;
 }
 .entry-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: .3rem .8rem;
+  gap: .35rem .85rem;
   margin-left: auto;
   font-family: var(--mono);
-  font-size: .74rem;
+  font-size: .73rem;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.role { color: var(--accent); }
-.entry-sub {
-  margin: .45rem 0 0;
-  font-size: .86rem;
-  color: var(--muted);
-}
+.entry-meta .role { color: var(--accent); }
+.entry-sub { margin: .5rem 0 0; font-size: .86rem; color: var(--muted); }
+.entry-sub b { color: var(--fg-soft); font-weight: 500; }
 
 .stack {
   display: flex;
   flex-wrap: wrap;
   gap: .35rem;
-  margin: .7rem 0 0;
+  margin: .8rem 0 0;
   padding: 0;
   list-style: none;
 }
 .stack li {
-  padding: .1rem .5rem;
+  padding: .08rem .5rem;
   background: var(--chip-bg);
   border-radius: 3px;
   font-family: var(--mono);
-  font-size: .7rem;
+  font-size: .69rem;
   color: var(--fg-soft);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 .stack li.repo { background: transparent; border: 1px solid var(--line-2); }
 .stack li.repo a { font-weight: 500; }
 
-.bullets {
-  margin: .85rem 0 0;
-  padding: 0;
-  list-style: none;
-}
+.bullets { margin: .9rem 0 0; padding: 0; list-style: none; }
 .bullets li {
   position: relative;
   padding-left: 1.15rem;
-  margin-top: .55rem;
-  font-size: .9rem;
+  margin-top: .6rem;
+  font-size: .895rem;
   color: var(--fg-soft);
 }
 .bullets li::before {
   content: "";
   position: absolute;
-  left: 0; top: .72em;
-  width: .5rem; height: 1px;
+  left: 0; top: .75em;
+  width: .45rem; height: 1px;
   background: var(--accent);
 }
 .bullets b { color: var(--fg); font-weight: 500; }
-.bullets .num {
+.num {
   font-family: var(--mono);
-  font-size: .84em;
+  font-size: .87em;
   font-variant-numeric: tabular-nums;
-  color: var(--fg);
-  background: var(--chip-bg);
-  padding: 0 .28em;
+  font-weight: 500;
+  color: var(--accent-2);
+  background: var(--wash);
+  padding: .04em .3em;
   border-radius: 3px;
+  white-space: nowrap;
 }
 
-/* ── 教育 / 荣誉 的紧凑行 ───────────────────────────── */
+/* ── 教育：数据格 ───────────────────────────────────── */
 .facts {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem .5rem;
-  margin: .8rem 0 0;
+  gap: .5rem;
+  margin: .9rem 0 0;
   padding: 0;
   list-style: none;
 }
 .facts li {
-  padding: .35rem .7rem;
+  flex: 1 1 9rem;
+  padding: .6rem .8rem;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
-  font-size: .82rem;
-  font-variant-numeric: tabular-nums;
 }
 .facts .k {
   display: block;
   font-family: var(--mono);
-  font-size: .62rem;
-  letter-spacing: .12em;
+  font-size: .6rem;
+  letter-spacing: .13em;
   color: var(--faint);
+  line-height: 1.6;
 }
-.facts .v { font-weight: 500; }
+.facts .v {
+  display: block;
+  margin-top: .15rem;
+  font-size: .9rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .01em;
+}
 
-.rows { margin: 0; }
+/* ── 荣誉：键值表 ───────────────────────────────────── */
+.rows { margin: 0; display: grid; gap: 1.15rem; }
+.rows > div { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: 1.25rem; align-items: baseline; }
 .rows dt {
   font-family: var(--mono);
-  font-size: .68rem;
-  letter-spacing: .14em;
+  font-size: .66rem;
+  letter-spacing: .12em;
   color: var(--accent);
-  margin-top: 1.2rem;
+  padding-top: .28rem;
 }
-.rows dt:first-child { margin-top: 0; }
-.rows dd {
-  margin: .35rem 0 0;
-  font-size: .9rem;
-  color: var(--fg-soft);
-}
+.rows dd { margin: 0; font-size: .895rem; color: var(--fg-soft); }
 .rows dd strong { color: var(--fg); font-weight: 500; }
 
-/* ── 仓库列表 ───────────────────────────────────────── */
+/* ── 技能：键值对照 ─────────────────────────────────── */
+.skills { display: grid; gap: 1.15rem; }
+.skills > div { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1.25rem; align-items: baseline; }
+.skills dt {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+.skills dd { margin: 0; font-size: .895rem; color: var(--fg-soft); }
+.skills dd strong { color: var(--fg); font-weight: 500; }
+
+/* ── 仓库网格 ───────────────────────────────────────── */
 .repos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: .6rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: .55rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -342,76 +365,87 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
+  transition: border-color .15s ease;
 }
+.repos li:hover { border-color: var(--line-2); }
 .repos .rn {
   font-family: var(--mono);
-  font-size: .78rem;
+  font-size: .77rem;
   font-weight: 500;
   word-break: break-all;
 }
 .repos .rd {
   display: block;
-  margin-top: .2rem;
-  font-size: .78rem;
+  margin-top: .25rem;
+  font-size: .77rem;
   color: var(--muted);
   line-height: 1.55;
 }
 .repos .new::after {
   content: "新增";
   margin-left: .45rem;
-  padding: 0 .3rem;
+  padding: .02rem .3rem;
   font-family: var(--mono);
-  font-size: .6rem;
+  font-size: .58rem;
   letter-spacing: .08em;
   color: var(--accent);
   background: var(--wash);
   border-radius: 3px;
   vertical-align: 1px;
+  white-space: nowrap;
 }
 
 .foot {
-  margin-top: 3rem;
+  margin-top: 3.25rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
-  font-family: var(--mono);
-  font-size: .7rem;
-  color: var(--faint);
   display: flex;
   flex-wrap: wrap;
-  gap: .4rem 1rem;
+  gap: .4rem 1.25rem;
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--faint);
 }
 
 /* ── 窄屏 ───────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .section { grid-template-columns: 1fr; gap: 1rem; padding-block: 2.1rem; }
+@media (max-width: 880px) {
+  .page { padding-block: 2.25rem 3.5rem; }
+  .masthead { grid-template-columns: 1fr; gap: 1.35rem; }
+  .contact { text-align: left; }
+  .contact li { justify-content: start; grid-template-columns: auto 1fr; }
+  .tagline { max-width: none; }
+  .section { grid-template-columns: 1fr; gap: 1.1rem; padding-block: 2.15rem; }
   .section > .rail {
     position: static;
     display: flex;
     align-items: baseline;
-    gap: .7rem;
-    padding-top: 0;
-    padding-bottom: .2rem;
+    gap: .75rem;
+    padding-bottom: .5rem;
     border-bottom: 2px solid var(--accent);
   }
-  .rail .en { margin-top: 0; }
+  .rail .en::after { display: none; }
   .entry-meta { margin-left: 0; width: 100%; }
-  .page { padding-block: 2rem 3.5rem; }
+}
+@media (max-width: 560px) {
+  .rows > div, .skills > div { grid-template-columns: 1fr; gap: .3rem; }
+  .rows dt { padding-top: 0; }
 }
 
 /* ── 打印：Ctrl+P 直接导出 PDF ─────────────────────── */
 @media print {
-  :root { --bg: #fff; --surface: #fff; --fg: #000; --fg-soft: #222; --muted: #555;
-          --faint: #777; --line: #bbb; --line-2: #999; --accent: #0A4E58;
-          --accent-2: #0A4E58; --wash: #EEF4F5; --chip-bg: #F2F4F5; }
+  :root { --bg:#fff; --surface:#fff; --fg:#000; --fg-soft:#1e1e1e; --muted:#4a4a4a;
+          --faint:#6a6a6a; --line:#c2c2c2; --line-2:#9a9a9a; --accent:#0A4E58;
+          --accent-2:#0A4E58; --wash:#EDF3F4; --chip-bg:#F1F3F4; }
   body { font-size: 10.5pt; background: #fff; color: #000; }
   .page { max-width: none; padding: 0; }
-  .section { padding-block: 1.1rem; }
-  .section > .rail { position: static; }
+  .section { padding-block: 1.05rem; }
+  .section > .rail, .rail .en::after { position: static; }
   .entry, .repos li, .facts li, .target { break-inside: avoid; }
-  .entry + .entry { margin-top: 1.1rem; padding-top: 1.1rem; }
-  .name { font-size: 22pt; }
+  .entry + .entry { margin-top: 1.05rem; padding-top: 1.05rem; }
+  .name { font-size: 21pt; }
   a { color: #000; text-decoration: none; }
   .repos .new::after { display: none; }
+  .repos li:hover { border-color: var(--line); }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -422,44 +456,54 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 <div class="page">
 
   <header class="masthead">
-    <h1 class="name">张现发<span class="name-en">Zhang Xianfa</span></h1>
-    <p class="tagline">
-      山东科技大学（青岛校区）· 数据科学与大数据技术 · 本科 2023.09 – 2027.06<br>
-      男 · 22 岁 · 现居青岛 · 政治面貌：入党积极分子
-    </p>
+    <div class="who">
+      <h1 class="name">张现发<small>Zhang Xianfa</small></h1>
+      <p class="tagline">
+        山东科技大学（青岛校区）· 数据科学与大数据技术 · 本科 2023.09 – 2027.06<br>
+        <span>男 · 22 岁 · 现居青岛 · 政治面貌：入党积极分子</span>
+      </p>
+    </div>
 
     <ul class="contact">
-      <li><span class="k">TEL</span> <a href="tel:+8619045382689">190 4538 2689</a></li>
-      <li><span class="k">WECHAT</span> vx19045382689</li>
-      <li><span class="k">MAIL</span> <a href="mailto:1849363242@qq.com">1849363242@qq.com</a></li>
-      <li><span class="k">GITHUB</span> <a href="https://github.com/zhang-xianfa" target="_blank" rel="noopener">github.com/zhang-xianfa</a></li>
-      <li><span class="k">KAGGLE</span> <a href="https://www.kaggle.com/zhangxianfa" target="_blank" rel="noopener">kaggle.com/zhangxianfa</a></li>
+      <li><span class="k">TEL</span><span class="v"><a href="tel:+8619045382689">190 4538 2689</a></span></li>
+      <li><span class="k">WECHAT</span><span class="v">vx19045382689</span></li>
+      <li><span class="k">MAIL</span><span class="v"><a href="mailto:1849363242@qq.com">1849363242@qq.com</a></span></li>
+      <li><span class="k">GITHUB</span><span class="v"><a href="https://github.com/zhang-xianfa" target="_blank" rel="noopener">github.com/zhang-xianfa</a></span></li>
+      <li><span class="k">KAGGLE</span><span class="v"><a href="https://www.kaggle.com/zhangxianfa" target="_blank" rel="noopener">kaggle.com/zhangxianfa</a></span></li>
     </ul>
-
-    <div class="target">
-      <span class="k">求职意向</span>
-      <span class="v">人工智能应用 / 数据分析与开发 / 技术支持工程师</span>
-      <span class="note">可接受出差 · 无考试计划 · 月内到岗</span>
-    </div>
   </header>
+
+  <div class="target">
+    <span class="k">求职意向</span>
+    <span class="v">人工智能应用 / 数据分析与开发 / 技术支持工程师</span>
+    <span class="note">可接受出差 · 随时实习</span>
+  </div>
 
   <!-- 教育经历 -->
   <section class="section">
     <div class="rail"><span class="zh">教育经历</span><span class="en">Education</span></div>
     <div class="body">
-      <div class="entry">
-        <div class="entry-head">
-          <h2 class="entry-title">山东科技大学（青岛校区）　数据科学与大数据技术</h2>
-          <div class="entry-meta"><span>本科</span><span>2023.09 – 2027.06</span></div>
-        </div>
-        <ul class="facts">
-          <li><span class="k">GPA</span><span class="v">3.47 / 4.0　（86.64 分）</span></li>
-          <li><span class="k">专业排名</span><span class="v">24 / 200　前 12%</span></li>
-          <li><span class="k">班级排名</span><span class="v">3 / 32　前 9%</span></li>
-        </ul>
-        <p class="entry-sub"><b>主修课程</b>　Hadoop、大数据分析方法及应用、算法设计与分析、时间序列分析、数据采集与网络爬虫、C++、Java、Python、Linux、Matlab、R 语言、数据库原理及应用、数据可视化、云计算、软件工程、计算机网络、算法程序与设计</p>
-        <p class="entry-sub"><b>资格证书</b>　大学英语四级（CET-4）、中级大数据工程师、国际人才英语考试（ETIC）、普通话证书、机动车驾驶证</p>
+      <div class="entry-head">
+        <h2 class="entry-title">山东科技大学（青岛校区）　数据科学与大数据技术</h2>
+        <div class="entry-meta"><span>本科</span><span>2023.09 – 2027.06</span></div>
       </div>
+
+      <ul class="facts">
+        <li><span class="k">GPA</span><span class="v">3.47 / 4.0　86.64 分</span></li>
+        <li><span class="k">专业排名</span><span class="v">24 / 200　前 12%</span></li>
+        <li><span class="k">班级排名</span><span class="v">3 / 32　前 9%</span></li>
+      </ul>
+
+      <dl class="skills" style="margin-top:1.35rem">
+        <div>
+          <dt>主修课程</dt>
+          <dd>Hadoop、大数据分析方法及应用、算法设计与分析、时间序列分析、数据采集与网络爬虫、C++、Java、Python、Linux、Matlab、R 语言、数据库原理及应用、数据可视化、云计算、软件工程、计算机网络、算法程序与设计</dd>
+        </div>
+        <div>
+          <dt>资格证书</dt>
+          <dd>大学英语四级（CET-4）、中级大数据工程师、国际人才英语考试（ETIC）、普通话证书、机动车驾驶证</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
@@ -468,17 +512,22 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
     <div class="rail"><span class="zh">荣誉奖项</span><span class="en">Honors</span></div>
     <div class="body">
       <dl class="rows">
-        <dt>国家级</dt>
-        <dd><strong>国家励志奖学金</strong></dd>
-
-        <dt>省部级</dt>
-        <dd>全国大学生市场调查与分析大赛 <strong>一等奖</strong>；全国大学生数学建模竞赛 <strong>二等奖</strong>；全国大学生统计建模大赛 <strong>二等奖</strong>；五一数学建模竞赛 <strong>二等奖</strong>；山东省数学建模竞赛 三等奖；全球校园人工智能算法精英大赛 算法创新奖；蓝桥杯程序设计竞赛 省奖；山东省大学生科技外语大赛　等省级奖项</dd>
-
-        <dt>院校级</dt>
-        <dd>一等奖学金、优秀学生干部、优秀共青团员、优秀学生标兵、三好学生、优秀志愿者、数学九五奖学金等</dd>
-
-        <dt>科研项目</dt>
-        <dd>参与国家级大创 1 项（机器视觉方向）、校级大创 3 项，<strong>均已结项</strong></dd>
+        <div>
+          <dt>国家级</dt>
+          <dd><strong>国家励志奖学金</strong></dd>
+        </div>
+        <div>
+          <dt>省部级</dt>
+          <dd>全国大学生市场调查与分析大赛 <strong>一等奖</strong>；全国大学生数学建模竞赛 <strong>二等奖</strong>；全国大学生统计建模大赛 <strong>二等奖</strong>；五一数学建模竞赛 <strong>二等奖</strong>；山东省数学建模竞赛 三等奖；全球校园人工智能算法精英大赛 算法创新奖；蓝桥杯程序设计竞赛 省奖；山东省大学生科技外语大赛　等省级奖项</dd>
+        </div>
+        <div>
+          <dt>院校级</dt>
+          <dd>一等奖学金、优秀学生干部、优秀共青团员、优秀学生标兵、三好学生、优秀志愿者、数学九五奖学金等</dd>
+        </div>
+        <div>
+          <dt>科研项目</dt>
+          <dd>参与国家级大创 1 项（机器视觉方向）、校级大创 3 项，<strong>均已结项</strong></dd>
+        </div>
       </dl>
     </div>
   </section>
@@ -501,7 +550,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
           <li><b>多轮问诊工作流：</b>基于 FastAPI + LangGraph 搭建「安全检测 → 基础问诊 → 专家问诊 → 诊断报告」四阶段工作流，基础问诊 ≤ 5 轮、会话总轮次 ≤ 10 轮，完成业务分层与循环交互逻辑。</li>
           <li><b>混合检索与存储：</b>「向量 + BM25」双路召回 + RRF（k=60）融合，按来源权威度加权（指南 0.9 &gt; 共识 0.75），结果按知识条目跨轮次去重累计；PostgreSQL + pgvector 统一存储业务数据与 22 条知识条目。</li>
           <li><b>容错与安全护栏：</b>封装 LLM 适配层 —— embedding 三级降级、四重 JSON 修复 + Pydantic 校验、失败重试 3 次；构建 3 条 L0 危急关键词阻塞规则、6 类 PII 脱敏与双向剂量阻断等确定性安全护栏。</li>
-          <li><b>工程与交付：</b>后端 6,036 行、8 个 REST 接口、9 张数据表；24 个 E2E 用例 100% 自动化（132 个测试函数）；Docker Compose 4 服务部署至腾讯云，Git 累计 44 次提交。</li>
+          <li><b>工程与交付：</b>后端 <span class="num">6,036</span> 行、8 个 REST 接口、9 张数据表；24 个 E2E 用例 100% 自动化（132 个测试函数）；Docker Compose 4 服务部署至腾讯云，Git 累计 44 次提交。</li>
         </ul>
       </article>
 
@@ -518,8 +567,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
           <li><b>数据清洗与特征工程：</b>解析煤矿束管监测系统 12 个月、每日一表的月度 .xls 报表（表头 3 行、格式不统一），完成缺失值插值与回风数据剔除；构造 13 维测点特征（6 项基础气体浓度 + 6 项一阶差分 + Graham 比值 CO/O₂），并将 6 个监测点、2 条巷道建模为两级图结构。</li>
           <li><b>建模与训练：</b>设计分层时空图神经网络 —— 微观层 2 层多头 GAT（4 头 → 1 头）捕获测点间气体流动的空间关联，宏观层 2 层 GCN 抽象巷道级趋势，跨层双向消息传递（均值池化上送 / 广播下传，残差 + LayerNorm），再经 2 层 GRU 建模时序依赖；用过去 7 天数据预测第 8 天各测点气体浓度。</li>
           <li><b>小样本与业务约束：</b>设计 RiskAwareLoss 非对称风险感知损失（O₂ 权重 15 / CO 漏报惩罚 2 / CO₂ 权重 5），对漏报加倍惩罚；针对约 300 天小样本，用 weight_decay、全链路 Dropout、按验证损失保存最优模型等策略抑制过拟合。</li>
-          <li><b>消融与工程化：</b>消融发现 CO 惩罚系数取 5.0 时模型虚报 CO 至 10.7 ppm，下调至 2.0 后抑制虚报；将 950 行单文件原型重构为 12 个模块（2,442 行），数据按 7 : 1.5 : 1.5 划分。</li>
-          <li><b>风险评估与可视化：</b>基于「熵权法 × 7 日趋势因子 × CO 浓度压制」搭建三层风险评估体系（CO &gt; 24 ppm 触发预警），产出 254 张单日 / 时序热力图与 3D 巷道风险可视化定位高风险测点，独立撰写技术报告。</li>
+          <li><b>消融与工程化：</b>消融发现 CO 惩罚系数取 5.0 时模型虚报 CO 至 <span class="num">10.7 ppm</span>，下调至 2.0 后抑制虚报；将 950 行单文件原型重构为 12 个模块（2,442 行），数据按 7 : 1.5 : 1.5 划分。</li>
+          <li><b>风险评估与可视化：</b>基于「熵权法 × 7 日趋势因子 × CO 浓度压制」搭建三层风险评估体系（CO &gt; 24 ppm 触发预警），产出 <span class="num">254</span> 张单日 / 时序热力图与 3D 巷道风险可视化定位高风险测点，独立撰写技术报告。</li>
         </ul>
       </article>
 
@@ -615,20 +664,20 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
   <section class="section">
     <div class="rail"><span class="zh">校园经历</span><span class="en">Campus</span></div>
     <div class="body">
-      <div class="entry">
+      <article class="entry">
         <div class="entry-head">
           <h2 class="entry-title">学生工作</h2>
           <div class="entry-meta"><span>2023.09 – 2026.09</span></div>
         </div>
         <p class="entry-sub">曾在校团委、数学学院科创部、校人事处工作，任班级班委，负责赛事组织与设备维护，获评校「优秀学生干部」。</p>
-      </div>
-      <div class="entry">
+      </article>
+      <article class="entry">
         <div class="entry-head">
           <h2 class="entry-title">志愿服务</h2>
           <div class="entry-meta"><span>2023.09 – 2026.09</span></div>
         </div>
         <p class="entry-sub">参与组织青岛马拉松、青岛啤酒节、暑期三下乡社会实践等活动，获评校「优秀志愿者」。</p>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -636,13 +685,28 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
   <section class="section">
     <div class="rail"><span class="zh">专业技能</span><span class="en">Skills</span></div>
     <div class="body">
-      <ul class="bullets">
-        <li><b>AI 与算法：</b>掌握 PyTorch，可搭建时序模型与图神经网络（GAT / GCN / GRU）；具备 LLM 应用开发经验，熟悉 RAG、向量检索、混合召回（BM25 / RRF）、Agent 工作流编排（LangGraph）与 Prompt 工程。</li>
-        <li><b>后端与工程：</b>熟练 Python，熟悉 FastAPI / RESTful 接口开发；熟练 Linux 常用命令与 Shell 脚本、Git 版本管理、Docker 容器化部署，具备项目云端部署与系统测试经验。</li>
-        <li><b>数据分析与建模：</b>熟练运用 Pandas、NumPy、SciPy 与 SQL 开展数据清洗、特征工程、统计分析与可视化，掌握假设检验、时间序列分析；可使用 SPSS、Stata、AMOS、Power BI 完成问卷统计、信效度检验与模型分析。</li>
-        <li><b>数据库与存储：</b>熟练 SQL 编写与优化；掌握 PostgreSQL、MySQL，熟悉 pgvector 向量存储与 Redis 缓存。</li>
-        <li><b>大数据平台：</b>掌握 Hadoop 生态（HDFS、YARN），熟悉 Hive 数仓分层建模与 ETL 流程，了解 Flink、Kafka、Flume 等组件。</li>
-      </ul>
+      <dl class="skills">
+        <div>
+          <dt>AI 与算法</dt>
+          <dd>掌握 <strong>PyTorch</strong>，可搭建时序模型与图神经网络（GAT / GCN / GRU）；具备 <strong>LLM 应用开发</strong>经验，熟悉 <strong>RAG、向量检索、混合召回（BM25 / RRF）</strong>、<strong>Agent 工作流编排（LangGraph）</strong> 与 Prompt 工程。</dd>
+        </div>
+        <div>
+          <dt>后端与工程</dt>
+          <dd>熟练 <strong>Python</strong>，熟悉 <strong>FastAPI / RESTful</strong> 接口开发；熟练 <strong>Linux</strong> 常用命令与 <strong>Shell 脚本</strong>、<strong>Git</strong> 版本管理、<strong>Docker</strong> 容器化部署，具备项目云端部署与系统测试经验。</dd>
+        </div>
+        <div>
+          <dt>数据分析与建模</dt>
+          <dd>熟练运用 <strong>Pandas、NumPy、SciPy</strong> 与 <strong>SQL</strong> 开展数据清洗、特征工程、统计分析与可视化，掌握<strong>假设检验、时间序列分析</strong>；可使用 <strong>SPSS、Stata、AMOS、Power BI</strong> 完成问卷统计、信效度检验与模型分析。</dd>
+        </div>
+        <div>
+          <dt>数据库与存储</dt>
+          <dd>熟练 <strong>SQL 编写与优化</strong>；掌握 <strong>PostgreSQL、MySQL</strong>，熟悉 <strong>pgvector 向量存储</strong>与 Redis 缓存。</dd>
+        </div>
+        <div>
+          <dt>大数据平台</dt>
+          <dd>掌握 <strong>Hadoop 生态（HDFS、YARN）</strong>，熟悉 <strong>Hive 数仓分层建模与 ETL 流程</strong>，了解 Flink、Kafka、Flume 等组件。</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
@@ -652,7 +716,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
     <div class="body">
       <ul class="bullets">
         <li>具备完整的 AI 应用开发能力：从 LLM 调用适配、RAG 检索链路构建、Agent 工作流编排到 Docker 部署上线，能主导一个 AI 应用从 0 到 1 的工程交付；同时具备扎实的数据处理与建模功底。</li>
-        <li>有真实企业横向课题经验（2 项，均任第一负责人），习惯用数据支撑结论：如将油罐车计量平均相对误差降至 0.736%、为煤矿自燃预警设计三层风险评估体系。</li>
+        <li>有真实企业横向课题经验（2 项，均任第一负责人），习惯用数据支撑结论：如将油罐车计量平均相对误差降至 <span class="num">0.736%</span>、为煤矿自燃预警设计三层风险评估体系。</li>
         <li>学习与自驱能力强：GPA 专业前 12%，获国家级奖学金及十余项省级以上竞赛奖项，能在短时间内上手陌生技术栈并落地。</li>
       </ul>
     </div>
@@ -673,6 +737,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
         <li><a class="rn new" href="https://github.com/zhang-xianfa/fingerprint-enhancement" target="_blank" rel="noopener">fingerprint-enhancement</a><span class="rd">潜在指纹增强 · 多尺度 PatchGAN</span></li>
         <li><a class="rn new" href="https://github.com/zhang-xianfa/str-mixture-identification" target="_blank" rel="noopener">str-mixture-identification</a><span class="rd">法医物证多人身份鉴定 · STR 混合图谱</span></li>
         <li><a class="rn new" href="https://github.com/zhang-xianfa/sake-secondhand-marketplace" target="_blank" rel="noopener">sake-secondhand-marketplace</a><span class="rd">SAKE 校园二手交易平台</span></li>
+        <li><a class="rn new" href="https://github.com/zhang-xianfa/qingdao-lard-market-survey" target="_blank" rel="noopener">qingdao-lard-market-survey</a><span class="rd">青岛脂渣消费机制与营销策略研究</span></li>
       </ul>
     </div>
   </section>

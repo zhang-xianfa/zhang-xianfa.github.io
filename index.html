@@ -581,6 +581,22 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 
       <article class="entry">
         <div class="entry-head">
+          <h2 class="entry-title">企业私有知识库问答 POC（基于 WeKnora 的 RAG 二次开发）</h2>
+          <div class="entry-meta"><span class="role">AI 应用实习 · 智途人工智能（青岛）</span><span>2026.07 – 2026.09</span></div>
+        </div>
+        <ul class="stack">
+          <li>Python</li><li>RAG</li><li>WeKnora</li><li>Docker</li><li>REST API</li><li>pytest</li>
+          <li class="repo"><a href="https://github.com/zhang-xianfa/zhitu-weknora-kb" target="_blank" rel="noopener">zhitu-weknora-kb</a></li>
+        </ul>
+        <ul class="bullets">
+          <li><b>文档清洗分块：</b>清页眉页脚、目录行、重复标题等版式冗余，提取文件编号 / 版本号 / 生效日期为元信息块前置、修复「第 三 条」类断裂编号；按章-节-条切分并注入层级路径，表格整表不切、超长条款按句拆、同章短块合并（样例制度 14 块 → 8 块、块均约 100 字）；sha256 内容指纹幂等入库，重跑不产生重复条目。</li>
+          <li><b>边界评测体系：</b>按事实型 / 条款型 / 跨条款多跳 / 无答案负例 / 时效版本五类设计 12 条用例（负例占 33%），定义命中 / 引用 / 误拒 / 拒答 / 延迟五项指标，全部用可复算的关键词与引用判定、不依赖 LLM 裁判；区分「只测召回」与「端到端」双模式定位问题层级，输出逐条明细与失败清单，作为改分块、改 prompt 的回归门禁。</li>
+          <li><b>接口联调与异常治理：</b>对接 REST 接口完成鉴权、知识库与条目管理、上传与检索问答联调；封装超时分级（连接 5s / 读 30s）、只对超时与 429/5xx 做指数退避加抖动重试、令牌桶限流 5 QPS、连续 5 次失败熔断 30 秒，并区分可重试与参数错误两类异常；沉淀五步上线自检脚本与 21 项离线单测（含假服务端验证重试与熔断）。</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
           <h2 class="entry-title">B/S 架构医疗 AI 智能问诊 RAG 系统</h2>
           <div class="entry-meta"><span class="role">个人开发</span><span>2026.04 – 2026.07</span></div>
         </div>
@@ -590,9 +606,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
         </ul>
         <ul class="bullets">
           <li><b>多轮问诊工作流：</b>基于 FastAPI + LangGraph 搭建「安全检测 → 基础问诊 → 专家问诊 → 诊断报告」四阶段工作流，基础问诊 ≤ 5 轮、会话总轮次 ≤ 10 轮，完成业务分层与循环交互逻辑。</li>
-          <li><b>混合检索与存储：</b>「向量 + BM25」双路召回 + RRF（k=60）融合，按来源权威度加权（指南 0.9 &gt; 共识 0.75），结果按知识条目跨轮次去重累计；PostgreSQL + pgvector 统一存储业务数据与 22 条知识条目。</li>
+          <li><b>混合检索与存储：</b>「向量 + BM25」双路召回 + RRF（k=60）融合，按来源权威度加权（指南 0.9 &gt; 共识 0.75），结果按知识条目跨轮次去重累计；PostgreSQL + pgvector 统一存储业务数据与 24 条知识条目。</li>
           <li><b>容错与安全护栏：</b>封装 LLM 适配层 —— embedding 三级降级、四重 JSON 修复 + Pydantic 校验、失败重试 3 次；构建 3 条 L0 危急关键词阻塞规则、6 类 PII 脱敏与双向剂量阻断等确定性安全护栏。</li>
-          <li><b>工程与交付：</b>后端 <span class="num">6,036</span> 行、8 个 REST 接口、9 张数据表；24 个 E2E 用例 100% 自动化（132 个测试函数）；Docker Compose 4 服务部署至腾讯云，Git 累计 44 次提交。</li>
+          <li><b>工程与交付：</b>后端 <span class="num">4,379</span> 行（含测试 <span class="num">5,636</span> 行）、13 个 REST 接口、4 张数据表；24 条 E2E 场景设计（15 组已固化为自动化），136 个测试函数、参数化后 <span class="num">152</span> 个用例；Docker Compose 4 服务部署至腾讯云。</li>
         </ul>
       </article>
 
@@ -606,10 +622,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
           <li class="repo"><a href="https://github.com/zhang-xianfa/coal-fire-warning" target="_blank" rel="noopener">coal-fire-warning</a></li>
         </ul>
         <ul class="bullets">
-          <li><b>数据清洗与特征工程：</b>解析煤矿束管监测系统 12 个月、每日一表的月度 .xls 报表（表头 3 行、格式不统一），完成缺失值插值与回风数据剔除；构造 13 维测点特征（6 项基础气体浓度 + 6 项一阶差分 + Graham 比值 CO/O₂），并将 6 个监测点、2 条巷道建模为两级图结构。</li>
+          <li><b>数据清洗与特征工程：</b>解析煤矿束管监测系统 12 个月、每日一表的月度 .xls 报表（表头 3 行、格式不统一），完成缺失值插值与回风数据剔除；构造 13 维测点特征（6 项基础气体浓度 + 6 项一阶差分 + Graham 比值 CO/O₂），并将 7 个测点（含回风隅角）、2 条巷道建模为两级图结构。</li>
           <li><b>建模与训练：</b>设计分层时空图神经网络 —— 微观层 2 层多头 GAT（4 头 → 1 头）捕获测点间气体流动的空间关联，宏观层 2 层 GCN 抽象巷道级趋势，跨层双向消息传递（均值池化上送 / 广播下传，残差 + LayerNorm），再经 2 层 GRU 建模时序依赖；用过去 7 天数据预测第 8 天各测点气体浓度。</li>
           <li><b>小样本与业务约束：</b>设计 RiskAwareLoss 非对称风险感知损失（O₂ 权重 15 / CO 漏报惩罚 2 / CO₂ 权重 5），对漏报加倍惩罚；针对约 300 天小样本，用 weight_decay、全链路 Dropout、按验证损失保存最优模型等策略抑制过拟合。</li>
-          <li><b>消融与工程化：</b>消融发现 CO 惩罚系数取 5.0 时模型虚报 CO 至 <span class="num">10.7 ppm</span>，下调至 2.0 后抑制虚报；将 950 行单文件原型重构为 12 个模块（2,442 行），数据按 7 : 1.5 : 1.5 划分。</li>
+          <li><b>消融与工程化：</b>消融发现 CO 惩罚系数取 5.0 时模型虚报 CO 至 <span class="num">10.7 ppm</span>，下调至 2.0 后抑制虚报；将 950 行单文件原型重构为 12 个模块（2,442 行），数据按时间顺序 7 : 1.5 : 1.5 划分（另附随机划分口径作对照）。</li>
           <li><b>风险评估与可视化：</b>基于「熵权法 × 7 日趋势因子 × CO 浓度压制」搭建三层风险评估体系（CO &gt; 24 ppm 触发预警），产出 <span class="num">254</span> 张单日 / 时序热力图与 3D 巷道风险可视化定位高风险测点，独立撰写技术报告。</li>
         </ul>
       </article>
@@ -620,11 +636,11 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
           <div class="entry-meta"><span class="role">独立完成</span><span>2026.04 – 2026.06</span></div>
         </div>
         <ul class="stack">
-          <li>curl_cffi</li><li>Playwright</li><li>lxml</li><li>MySQL</li><li>Pandas</li><li>jieba</li><li>WordCloud</li><li>Flask</li>
+          <li>requests</li><li>lxml</li><li>MySQL</li><li>Pandas</li><li>jieba</li><li>WordCloud</li><li>Flask</li>
           <li class="repo"><a href="https://github.com/zhang-xianfa/job-crawler-analysis" target="_blank" rel="noopener">job-crawler-analysis</a></li>
         </ul>
         <ul class="bullets">
-          <li><b>数据采集：</b>针对招聘网站接口的反爬与限流，实现 requests / curl_cffi（TLS 指纹伪装）/ Playwright（无头浏览器）三套请求方案并实测拦截率，配合随机休眠、分页冷却与失败熔断机制，稳定采集青岛地区岗位信息 <span class="num">187</span> 条（累计抓取分页明细 <span class="num">1,562</span> 条）。</li>
+          <li><b>数据采集：</b>针对招聘网站接口的反爬与限流，前期对 requests / curl_cffi（TLS 指纹伪装）/ Playwright（无头浏览器）三套方案做过拦截率与成本调研，主干按部署成本选用 requests；配合随机休眠、分页冷却与失败熔断机制，稳定采集青岛地区岗位信息 <span class="num">187</span> 条（累计抓取分页明细 <span class="num">1,562</span> 条）。</li>
           <li><b>清洗与入库：</b>解析岗位名称、薪资区间、公司规模、技能标签等 12 个字段，处理「90-100 元/时」等非标准薪资格式（拆分为 min / max / avg 三列），清洗后写入 MySQL 结构化存储。</li>
           <li><b>分析与可视化：</b>用 pandas 完成岗位经验、学历与公司规模的分布统计及薪资描述性分析（青岛地区平均 <span class="num">7,428</span> 元、中位数 <span class="num">6,500</span> 元）；jieba 分词 + WordCloud 生成岗位技能需求词云，Flask 提供检索页面。</li>
         </ul>
@@ -657,7 +673,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
         </ul>
         <ul class="bullets">
           <li><b>建模与校正：</b>针对油罐车纵向 / 横向倾斜导致探针读数与真实储液量存在系统性偏差的问题，建立卧式油罐储液体积几何模型（200 × 100 网格二重数值积分）并推导变位修正关系；以「装车体积 = 卸车体积」为物理约束逐仓拟合校正系数（k ∈ [0.90, 1.10]，有效记录 &lt; 20 条的仓不参与优化），目标函数用误差中位数加正则化项以抗离群、防过拟合。</li>
-          <li><b>数据与结果：</b>处理 8 辆车共 <span class="num">3,303</span> 条装卸记录，整体平均相对误差 <span class="num">0.736%</span>（逐车 0.40% ~ 1.42%）；输出技术文档并面向企业宣讲对接。</li>
+          <li><b>数据与结果：</b>处理 8 辆车共 <span class="num">3,487</span> 条有效装卸记录，整体平均相对误差 <span class="num">2.04%</span>（逐车 0.33% ~ 3.66%，中位数约 1.0%）；输出技术文档并面向企业宣讲对接。</li>
         </ul>
       </article>
 
